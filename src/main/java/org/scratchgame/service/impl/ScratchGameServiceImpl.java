@@ -11,6 +11,8 @@ import org.scratchgame.service.util.WinChecker;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +81,17 @@ public class ScratchGameServiceImpl implements ScratchGameService {
         // 2. Evaluate win conditions
         Map<String, List<String>> winningCombinations = winchecker.checkWinningCombinations(board, scratchGameConfig);
 
+        if (winningCombinations.isEmpty()) {
+            System.out.println("No winning combinations found. Game completed.");
+            GameResult results = GameResult.builder()
+                    .board(board)
+                    .reward(0.0)
+                    .winningCombinations(new HashMap<>())
+                    .appliedBonusSymbol(new ArrayList<>())
+                    .build();
+            printGameResultAsJson(results);
+            return results;
+        }
         // 3. Calculate reward
         double reward = rewardCalculator.calculateReward(bettingAmount, board, winningCombinations, scratchGameConfig);
 
