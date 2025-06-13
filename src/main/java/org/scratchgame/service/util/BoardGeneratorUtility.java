@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
+/* *
+ * Utility class to generate the board for the scratch game.
+ */
 public class BoardGeneratorUtility {
 
     Random random;
@@ -15,6 +18,11 @@ public class BoardGeneratorUtility {
         this.random = new Random();
     }
 
+    /* *
+     * Generates the board based on the configuration.
+     * @param config
+     * @return
+     */
     public String[][] generateBoard(ScratchGameConfig config) {
         int rows = config.getRows();
         int columns = config.getColumns();
@@ -28,6 +36,13 @@ public class BoardGeneratorUtility {
         return board;
     }
 
+    /* *
+     * Utility method to get all possible symbols for a cell.
+     * @param config
+     * @param row
+     * @param col
+     * @return
+     */
     private Map<String, Integer> getAllPossibleSymbolsForCell(ScratchGameConfig config, int row, int col) {
         for (StandardSymbolProbability entry : config.getProbabilities().getStandardSymbols()) {
             if (entry.getRow() == row && entry.getColumn() == col) {
@@ -38,6 +53,11 @@ public class BoardGeneratorUtility {
         return config.getProbabilities().getBonusSymbols().getSymbols();
     }
 
+    /* *
+     * Utility method to get the random symbol based on the weights.
+     * @param weights
+     * @return
+     */
     private String getRandomSymbol(Map<String, Integer> weights) {
         int total = weights.values().stream().mapToInt(i -> i).sum();
         int r = random.nextInt(total);
@@ -53,6 +73,10 @@ public class BoardGeneratorUtility {
         return weights.keySet().iterator().next();
     }
 
+    /* *
+     * Utility method to print the board.
+     * @param board
+     */
     public void printBoard(String[][] board) {
         for (String[] row : board) {
             System.out.println(Arrays.toString(row));

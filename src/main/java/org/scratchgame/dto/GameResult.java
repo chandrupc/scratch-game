@@ -6,6 +6,9 @@ import lombok.*;
 import java.util.List;
 import java.util.Map;
 
+/* This class represents the result of a game, including the board, reward, winning combinations, and applied bonus symbols. */
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
 public class GameResult {

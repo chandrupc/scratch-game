@@ -1,6 +1,5 @@
 package org.scratchgame.service.util;
 
-import lombok.extern.slf4j.Slf4j;
 import org.scratchgame.dto.Position;
 import org.scratchgame.dto.ScratchGameConfig;
 import org.scratchgame.dto.WinCombination;
@@ -11,11 +10,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/* Utility class to check the winning combinations for the scratch game. */
 public class WinChecker {
 
     public WinChecker() {
     }
 
+    /**
+     * @param board
+     * @param config
+     * @return
+     */
     public Map<String, List<String>> checkWinningCombinations(String[][] board, ScratchGameConfig config) {
         Map<String, List<String>> winningCombinations = new HashMap<>();
 
@@ -28,6 +33,11 @@ public class WinChecker {
         return winningCombinations;
     }
 
+    /**
+     * @param board
+     * @param config
+     * @param winningCombinations
+     */
     private void checkSameSymbolCombinations(String[][] board, ScratchGameConfig config,
                                              Map<String, List<String>> winningCombinations) {
 
@@ -59,6 +69,11 @@ public class WinChecker {
         }
     }
 
+    /**
+     * @param board
+     * @param config
+     * @param winningCombinations
+     */
     private void checkLinearCombinations(String[][] board, ScratchGameConfig config,
                                          Map<String, List<String>> winningCombinations) {
 
@@ -85,6 +100,11 @@ public class WinChecker {
                 });
     }
 
+    /**
+     * @param board
+     * @param positions
+     * @return
+     */
     private boolean isLinearCombinationMatching(String[][] board, List<String> positions) {
         if (positions.isEmpty()) return false;
 

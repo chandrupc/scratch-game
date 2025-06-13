@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.scratchgame.dto.GameResult;
 import org.scratchgame.dto.ScratchGameConfig;
-import org.scratchgame.dto.enums.Impact;
-import org.scratchgame.dto.enums.SymbolType;
 import org.scratchgame.service.ScratchGameService;
 import org.scratchgame.service.util.BoardGeneratorUtility;
 import org.scratchgame.service.util.RewardCalculator;
@@ -16,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-
+/* *
+ * Implementation of the ScratchGameService interface.
+ */
 public class ScratchGameServiceImpl implements ScratchGameService {
 
     private ObjectMapper objectMapper;
@@ -39,6 +39,12 @@ public class ScratchGameServiceImpl implements ScratchGameService {
     }
 
 
+    /* *
+     * Loads the configuration file from the specified path.
+     * @param configPath The path to the configuration file.
+     * @param bettingAmount The betting amount for the game.
+     * @return The loaded ScratchGameConfig object.
+     */
     @Override
     public ScratchGameConfig loadConfigFile(String configPath, double bettingAmount) {
         // set the betting amount
@@ -55,6 +61,10 @@ public class ScratchGameServiceImpl implements ScratchGameService {
         return scratchGameConfig;
     }
 
+    /* *
+     * Plays the game with the loaded configuration.
+     * @return The GameResult object containing the game results.
+     */
     @Override
     public GameResult playGame() {
         System.out.println("Starting a new game with betting amount: " + this.bettingAmount);
@@ -89,10 +99,20 @@ public class ScratchGameServiceImpl implements ScratchGameService {
 
     }
 
+    /* *
+     * Converts the GameResult object to a JSON string.
+     * @param result The GameResult object to be converted.
+     * @return The JSON string representation of the GameResult object.
+     * @throws JsonProcessingException If an error occurs during JSON processing.
+     */
     public String convertResultToJson(GameResult result) throws IOException, JsonProcessingException {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
     }
 
+    /* *
+     * Prints the game result as a JSON string.
+     * @param result The GameResult object to be printed.
+     */
     public void printGameResultAsJson(GameResult result) {
         try {
             System.out.println("\n=== GAME RESULT (JSON) ===");

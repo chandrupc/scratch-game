@@ -10,11 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/* Utility class to calculate the reward for the scratch game. */
 public class RewardCalculator {
 
     public RewardCalculator() {
     }
 
+    /**
+     * @param betAmount
+     * @param board
+     * @param winningCombinations
+     * @param config
+     * @return
+     */
     public double calculateReward(double betAmount, String[][] board,
                                   Map<String, List<String>> winningCombinations,
                                   ScratchGameConfig config) {
@@ -40,6 +48,13 @@ public class RewardCalculator {
         return totalReward;
     }
 
+    /**
+     * @param betAmount
+     * @param symbolName
+     * @param combinations
+     * @param config
+     * @return
+     */
     private double calculateSymbolReward(double betAmount, String symbolName,
                                          List<String> combinations, ScratchGameConfig config) {
 
@@ -62,6 +77,11 @@ public class RewardCalculator {
         return combinationMultiplier;
     }
 
+    /**
+     * @param board
+     * @param config
+     * @return
+     */
     public List<String> findBonusSymbol(String[][] board, ScratchGameConfig config) {
         List<String> bonusSymbols = new ArrayList<>();
         for (int row = 0; row < board.length; row++) {
@@ -77,6 +97,12 @@ public class RewardCalculator {
         return bonusSymbols;
     }
 
+    /**
+     * @param currentReward
+     * @param bonusSymbols
+     * @param config
+     * @return
+     */
     private double applyBonusSymbol(double currentReward, List<String> bonusSymbols, ScratchGameConfig config) {
         for (String bonusSymbol : bonusSymbols) {
             Symbol symbol = config.getSymbols().get(bonusSymbol);

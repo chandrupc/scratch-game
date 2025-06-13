@@ -2,6 +2,7 @@ package org.scratchgame.dto;
 
 import lombok.Data;
 
+/* This class represents a position on a 2D grid, with row and column coordinates. */
 @Data
 public class Position {
     private int row;
